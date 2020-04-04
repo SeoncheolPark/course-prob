@@ -1,0 +1,6 @@
+---
+title: "Fake Statistics"
+author: "Instructor: Seoncheol Park"
+---
+
+이 course 웹사이트는 가상의 fake statistics course 웹사이트입니다.

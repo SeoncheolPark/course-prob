@@ -1,0 +1,20 @@
+name: "Fake Statistics"
+output_dir: "docs"
+navbar:
+  title: "Fake Statistics"
+  left:
+    - text: "Home"
+      href: index.html
+    - text: "Syllabus"
+      href: syllpdf.pdf
+    - text: "Lecture"
+      menu:
+        - text: "Lecture 1"
+          href: lec01.html
+    - text: "Homework"
+      href: hw.html
+    - text: "Exam"
+      href: exam.html
+  right:
+    - icon: fa-home
+      href: https://seoncheolpark.github.io
