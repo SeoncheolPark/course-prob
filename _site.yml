@@ -1,7 +1,7 @@
-name: "Fake Statistics"
+name: "Probability"
 output_dir: "docs"
 navbar:
-  title: "Fake Statistics"
+  title: "Probability"
   left:
     - text: "Home"
       href: index.html
@@ -9,8 +9,24 @@ navbar:
       href: syllpdf.pdf
     - text: "Lecture"
       menu:
-        - text: "Lecture 1"
-          href: lec01.html
+        - text: "Introduction"
+          href: html/ProbIntro.html
+        - text: "Sigma Fields"
+          href: html/Sigmafields.html
+        - text: "Probability Measures"
+          href: html/Probmeasures.html
+        - text: "Random Variables"
+          href: html/RVs.html
+        - text: "Distribution Functions"
+          href: html/Distribution.html
+        - text: "Independence"
+          href: html/Independence.html
+        - text: "Inverse Distribution Functions"
+          href: html/InvDistribution.html
+        - text: "Integration and Expectation"
+          href: html/IntegralExpectation.html
+        - text: "Convergence Concepts"
+          href: html/Convergence.html
     - text: "Homework"
       href: hw.html
     - text: "Exam"
