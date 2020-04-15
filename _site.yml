@@ -27,6 +27,12 @@ navbar:
           href: html/IntegralExpectation.html
         - text: "Convergence Concepts"
           href: html/Convergence.html
+        - text: "Characteristic Functions"
+          href: html/Characteristic.html
+        - text: "Convolution"
+          href: html/Convolution.html
+        - text: "Stable Distributions"
+          href: html/Stabledistn.html
     - text: "Homework"
       href: hw.html
     - text: "Exam"
