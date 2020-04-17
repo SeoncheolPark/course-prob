@@ -33,6 +33,8 @@ navbar:
           href: html/Convolution.html
         - text: "Stable Distributions"
           href: html/Stabledistn.html
+        - text: "Ergodic and Mixing"
+          href: html/ErgodicMixing.html
     - text: "Homework"
       href: hw.html
     - text: "Exam"

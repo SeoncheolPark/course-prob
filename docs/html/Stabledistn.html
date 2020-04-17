@@ -463,6 +463,89 @@ f(x;x_0 , \gamma) = \frac{1}{\pi \gamma \Bigg[ 1 + (\frac{x-x_0}{\gamma})^2  \Bi
 <p>이 질문과 symmetric stable distribution은 어떤 관련이 있을까? 만약 분산이 존재하지 않을 때 (normalized된) 확률변수의 합 <span class="math inline">\(\frac{\sum_{k=1}^{n}X_k}{n^{\frac{1}{\alpha}}}\)</span>가 <strong>asymptotically stable</strong> 할 것인가?</p>
 <p>A. 그렇다. 그리고 극한은 <strong>stable distribution</strong>이 된다. 다만 분산이 유한일 때보다 훨씬 복잡하다.</p>
 <p>한편 <strong>stability</strong>라는 이름은 i.i.d 확률변수들의 합이 linearly transformed summand와 같은 분포를 갖는다는 데에서 유래하였다.</p>
+
+<div class="definition">
+<p><span id="def:unnamed-chunk-4" class="definition"><strong>Definition 3  (Stable distribution)  </strong></span>확률변수 <span class="math inline">\(X\)</span>는 <span class="math inline">\(X, X_1, X_2, \ldots\)</span>가 i.i.d. 확률변수라고 할 때 partial sums <span class="math inline">\(S_{n}, n\geq 1\)</span>, 과 상수들 <span class="math inline">\(c_{n} &gt;0 , d_n \in \mathbb{R} , n\geq 1\)</span>이 존재해</p>
+<p><span class="math display">\[
+S_n \stackrel{d}{=}c_{n} X + d_n, \qquad{\text{for all }n}  
+\]</span></p>
+<p>을 만족한다면 확률변수 <span class="math inline">\(X\)</span>의 분포가 <strong>stable</strong>이라고 한다. 또한 모든 <span class="math inline">\(n\)</span>에 대해 <span class="math inline">\(d_n = 0\)</span>이라면 이 분포를 <strong>strictly stable</strong>이라고 한다.</p>
+</div>
+
+
+<div class="example">
+<p><span id="exm:unnamed-chunk-5" class="example"><strong>Example 1  (Normal distribution은 strictly stable)  </strong></span>평균이 0인 normal distribution은 <span class="math inline">\(c_{n}=\sqrt{n}\)</span>인 strictly stable distribution이다.</p>
+</div>
+
+
+<div class="example">
+<p><span id="exm:unnamed-chunk-6" class="example"><strong>Example 2  (Cauchy distribution은 strictly stable)  </strong></span>Cauchy은 <span class="math inline">\(c_{n}=n\)</span>인 strictly stable distribution이다.</p>
+</div>
+
+<p>일반적으로 <span class="math inline">\(X, X_1, X_2, \ldots\)</span>을 stable distribution을 갖는 indpendent random variable이라고 하고 단순함을 위해 여기서는 분포가 항상 symmetric이라고 하자. 그러면 <span class="math inline">\(S_{2n}\)</span>을 다음과 같이 두 가지 방법으로 표현할 수 있다.</p>
+<p><span class="math display">\[
+S_{2n} = \sum_{k=1}^{n}X_{k} + \sum_{k=n+1}^{2n}X_{k} \qquad{ and }S_{2n} = \sum_{k=1}^{2n}X_{k}.
+\]</span></p>
+<p>동시에 <span class="math inline">\(S_n \stackrel{d}{=}c_{n}X\)</span>였다는 것을 생각해보면 다음과 같이 된다.</p>
+<p><span class="math display">\[
+c_2 S_n \stackrel{d}{=}S_{2n} \stackrel{d}{=} c_{2n}X,
+\]</span></p>
+<p>이것은 다음과 같은 관계를 유도한다.</p>
+<p><span class="math display">\[c_{2n} = c_2 \cdot c_n.\]</span></p>
+<p>같은 방법으로 <span class="math inline">\(S_{mn}\)</span>을 equal length를 갖는 block로 나누어 수열 <span class="math inline">\(\{c_n , n \geq 1\}\)</span>이 multiplicative임을 보일 수 있다.</p>
+<p><span class="math display">\[
+\begin{align}
+c_{mn} &amp;= c_m \cdot c_n \qquad{\forall n, m \in \mathbb{N},}\\
+c_{n^{k}} &amp;= (c_n)^{k} \qquad{\forall n, k \in \mathbb{N}.}
+\end{align}
+\]</span></p>
+<p><span class="citation">Gut (2014)</span> 의 설명에 따르면 첫번째 것이 <strong>Hamel equation</strong>이라고 한다. 두 번째 식과 <span class="citation">Gut (2014)</span> 의 Corollary 3.7.1에 나온 내용 (Levy inequality의 Corollary)</p>
+
+<div class="corollary">
+<p><span id="cor:unnamed-chunk-7" class="corollary"><strong>Corollary 1  (Levy inequality의 Corollary)  </strong></span>만약 <span class="math inline">\(X_1, \ldots, X_n\)</span>들이 symmetric이라면 <span class="math inline">\(1\leq k \leq n\)</span>인 모든 <span class="math inline">\(x\)</span>에 대해</p>
+<p><span class="math display">\[\begin{align}
+P(S_{k} &gt; x) &amp;\leq 2 P (S_n &gt; x)\\
+P(|S_{k}| &gt; x) &amp;\leq 2 P (|S_n| &gt; x).
+\end{align}\]</span></p>
+</div>
+
+<p>을 취합하면 다음을 유도할 수 있다.</p>
+<p><span class="math display">\[\begin{align}
+P(X_1 &gt; x) &amp;= P(c_{n^{k}}X_1 &gt; c_{n^{k}}x)\\
+&amp;= P(S_{n^{k}}&gt; c_{n^{k}}x)\\
+&amp;\leq 2P(S_{(n+1)^{k}}&gt; c_{n^{k}}x)\\
+&amp;= 2P(c_{(n+1)^{k}}X_{1} &gt; c_{n^{k}}x)\\
+&amp;= 2P(X_{1} &gt; (\frac{c_{n}}{c_{n+1}})^{k}x).
+\end{align}\]</span></p>
+<p>이 식들을 잘 살펴보면 <span class="math inline">\(P(X_1 &gt; x)\)</span>이 0과 1 사이의 고정된 값을 갖으므로 가장 마지막의 <span class="math inline">\(2P(X_{1} &gt; (\frac{c_{n}}{c_{n+1}})^{k}x)\)</span>가 <span class="math inline">\(k\rightarrow infty\)</span>일 때 0으로 수렴하는 것을 막기 위해 <span class="math inline">\((\frac{c_{n}}{c_{n+1}})^{k}\)</span> 또한 모든 <span class="math inline">\(n\)</span>과 <span class="math inline">\(k\)</span>에 대해 bounded 되어야 한다. 이것은 <span class="math inline">\(\frac{c_n}{c_{n+1}}&lt;1, \forall n\)</span>을 말해준다, 즉 <span class="math inline">\(\{c_n \}\)</span>은 increasing이다.</p>
+<p>한편 다음의 lemma을 살펴보자.</p>
+
+<div class="lemma">
+<p><span id="lem:unnamed-chunk-8" class="lemma"><strong>Lemma 1  (Interval에서 정의된 continuous, monotone 또는 bounded 함수의 성질)  </strong></span><span class="citation">Gut (2014)</span> 의 A.8.2에 나오는 내용이다. Let <span class="math inline">\(g\)</span> be a real-valued function defined on some interval <span class="math inline">\(I\subset \mathbb{R}^{+}\)</span>, and suppose that <span class="math inline">\(g\)</span> is continuous, monotone, or bounded.</p>
+<ol style="list-style-type: lower-alpha">
+<li><p>If <span class="math inline">\(g(xy) = g(x) + g(y)\)</span>, then <span class="math inline">\(g(x) = c\log x\)</span> for some <span class="math inline">\(c \in \mathbb{R}\)</span>.</p></li>
+<li><p>If <span class="math inline">\(g(xy) = g(x) \cdot g(y)\)</span>, then <span class="math inline">\(g(x) = x^{c}\)</span> for some <span class="math inline">\(c \in \mathbb{R}\)</span>. (Hamel equation)</p></li>
+<li><p>If <span class="math inline">\(g(x + y) = g(x) \cdot g(y)\)</span>, then <span class="math inline">\(g(x) = e^{cx}\)</span> for some <span class="math inline">\(c \in \mathbb{R}\)</span>.</p></li>
+</ol>
+</div>
+
+<p>이 lemma의 b에 의해 다음을 알 수 있다.</p>
+<p><span class="math display">\[\begin{equation}
+c_n = n^{\frac{1}{\alpha}}, \qquad{\text{for }\alpha &gt;0.}
+\end{equation}\]</span></p>
+<p>Q. 이러한 normalizing sequence가 있을 때, characteristic function은 어떻게 되는가?</p>
+<p>A. <span class="math inline">\(S_n \stackrel{d}{=}n^{\frac{1}{\alpha}}X\)</span>이기 때문에, symmetric stable function의 characteristic function은 다음을 반드시 만족해야 한다.</p>
+<p><span class="math display">\[
+\varphi(t) = \Bigg(\varphi(\frac{t}{n^{\frac{1}{\alpha}}})\Bigg)^{n}, \qquad{\forall n \in \mathbb{N}.}
+\]</span></p>
+<p>Normal과 Cauchy distribution의 characteristic function들이 각각 exponential 2, 1의 꼴이므로 다음과 같은 형태가 될 것이다.</p>
+<p><span class="math display">\[\begin{equation}
+\varphi(t) = e^{-c|t|^{\alpha}},
+\end{equation}\]</span></p>
+<p>이 때 <span class="math inline">\(c&gt;0\)</span>은 어떤 상수다. 그리고 다음이 성립한다.</p>
+<p><span class="math display">\[
+e^{\Bigg\{-c|\frac{t}{n^{\frac{1}{\alpha}}}|^{\alpha}\Bigg\}^{n}} = e^{-c|t|^{\alpha}}.
+\]</span></p>
 <div id="refs" class="references">
 <div id="ref-Gut2014">
 <p>Gut, Allan. 2014. <em>Probability: A Graduate Course</em>. 2nd ed. Springer New York. <a href="https://www.ebook.de/de/product/23277813/allan_gut_probability_a_graduate_course.html">https://www.ebook.de/de/product/23277813/allan_gut_probability_a_graduate_course.html</a>.</p>
