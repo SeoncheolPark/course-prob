@@ -379,6 +379,9 @@ summary {
 <li><a href="#m-dependent">m-dependent</a></li>
 <li><a href="#introduction-to-mixing-measures-of-dependence">Introduction to mixing: measures of dependence</a></li>
 <li><a href="#random-variable들의-mixing">Random variable들의 mixing</a></li>
+<li><a href="#beta-mixing"><span class="math inline">\(\beta\)</span>-mixing</a><ul>
+<li><a href="#ibragimov-conjecture">Ibragimov conjecture</a></li>
+</ul></li>
 </ul>
 </div>
 
@@ -534,7 +537,7 @@ I_{k}
 <p><span class="math display">\[\begin{align}
 P(I_k = 1) &amp;= \frac{1}{3}, \qquad{\forall k \geq 2,}\\
 P(I_k = 1, I_{k+1} = 1) &amp;= 0, \qquad{\forall k \geq 2,}\\
-P(I_k = 1, I_{k+2} = 1) *= \frac{2}{15}, \qquad{\forall k \geq 2,}\\
+P(I_k = 1, I_{k+2} = 1) &amp;= \frac{2}{15}, \qquad{\forall k \geq 2,}\\
 P(I_k = 1, I_j = 1) &amp;= \frac{1}{9}, \qquad{\text{for } |i-j| &gt; 2, i, j \geq 2}
 \end{align}\]</span></p>
 <p>이며 indicator들의 sequence는 2-dependent이다.</p>
@@ -554,14 +557,14 @@ Y_n = g(X_n, X_{n+1},\ldots, X_{n+m-1}, X_{n+m}), \qquad{n \geq 1.}
 \alpha(\mathcal{H}, \mathcal{G}) &amp;= \sup_{F\in \mathcal{H}, G\in \mathcal{G}}|P(F\cap G) - P(F)P(G)|;\\
 \phi(\mathcal{H}, \mathcal{G}) &amp;= \sup_{F\in \mathcal{H}, G\in \mathcal{G}}|P(G|F) - P(G)|, \qquad{\text{for } P(F)&gt;0;}\\
 \psi(\mathcal{H}, \mathcal{G}) &amp;= \sup_{F\in \mathcal{H}, G\in \mathcal{G}}\frac{|P(F\cap G) - P(F)P(G)|}{P(F)P(G)};\\
-\rho(\mathcal{H}, \mathcal{G}) &amp;= \sup_{X\in L^2(\mathcal{H}), Y\in L^2(\mathcal{G})}|\rho_{X,Y}|.
+\rho(\mathcal{H}, \mathcal{G}) &amp;= \sup_{X\in L^2(\mathcal{H}), Y\in L^2(\mathcal{G})}|\rho_{X,Y}|. \qquad{\rho: \text{correlation}}
 \end{align}\]</span></p>
-<p>이들 사이에는 다음과 같은 상관관계들을 존재한다.</p>
+<p>이들 사이에는 다음과 같은 상관관계들이 존재한다.</p>
 <p><span class="math display">\[\begin{align}
 \alpha(\mathcal{H}, \mathcal{G}) &amp;\leq \frac{1}{4}, \psi(\mathcal{H}, \mathcal{G}) \geq 1, \rho(\mathcal{H}, \mathcal{G}) \geq 1,\\
 4\alpha(\mathcal{H}, \mathcal{G}) &amp;\leq 2\phi(\mathcal{H}, \mathcal{G}) \leq \psi(\mathcal{H}, \mathcal{G}) \\
 4\alpha(\mathcal{H}, \mathcal{G}) &amp;\leq \rho(\mathcal{H}, \mathcal{G}) \leq \psi(\mathcal{H}, \mathcal{G}) \\
-\rho(\mathcal{H}, \mathcal{G}) &amp;\leq 2\sqrt{\phi(\mathcal{H}, \mathcal{G})}.
+\rho(\mathcal{H}, \mathcal{G}) &amp;\leq 2\sqrt{\phi(\mathcal{H}, \mathcal{G})}. 
 \end{align}\]</span></p>
 </div>
 <div id="random-variable들의-mixing" class="section level2">
@@ -575,7 +578,7 @@ Y_n = g(X_n, X_{n+1},\ldots, X_{n+m-1}, X_{n+m}), \qquad{n \geq 1.}
 \alpha(n) &amp;= \sup_{k\in \mathbb{Z}^{+}} \alpha(\mathcal{F}_{1}^{k}, \mathcal{F}_{k+n}^{\infty})\\
 \phi(n) &amp;= \sup_{k\in \mathbb{Z}^{+}} \phi(\mathcal{F}_{1}^{k}, \mathcal{F}_{k+n}^{\infty})\\
 \psi(n) &amp;= \sup_{k\in \mathbb{Z}^{+}} \psi(\mathcal{F}_{1}^{k}, \mathcal{F}_{k+n}^{\infty})\\
-\rho(n) &amp;= \sup_{k\in \mathbb{Z}^{+}} \rho(\mathcal{F}_{1}^{k}, \mathcal{F}_{k+n}^{\infty})
+\rho(n) &amp;= \sup_{k\in \mathbb{Z}^{+}} \rho(\mathcal{F}_{1}^{k}, \mathcal{F}_{k+n}^{\infty}) 
 \end{align}\]</span></p>
 <p>Mixing coeffcient들은 sequence <span class="math inline">\(\{ X_k , k\geq 1\}\)</span>안의 <span class="math inline">\(n\)</span> “time unit”만큼 떨어진 portion들의 dependence를 재는 역할을 한다. 앞서 measures of dependence에 inequality가 있었던 것처럼 이들 사이에도 어떤 것이 강하고 약한 조건이 있는지 구분할 수 있다.</p>
 <p>만약 mixing coefficient들이 <span class="math inline">\(n\rightarrow 0\)</span>일 때 0으로 수렴하면 이것을 <strong>asymptotic independence</strong>로 설명할 수 있다. 이는 <span class="math inline">\(\mathcal{F}_{1}^{k}, \mathcal{F}_{k+n}^{\infty}\)</span>에 속하는 두 사건들이 <span class="math inline">\(n\rightarrow \infty\)</span>임에 따라 asymptotically independent이기 때문이다.</p>
@@ -598,7 +601,38 @@ Y_n = g(X_n, X_{n+1},\ldots, X_{n+m-1}, X_{n+m}), \qquad{n \geq 1.}
 <p>즉 <span class="math inline">\(\alpha\)</span>-mixing sequence들에 대해 central limit theorem을 보이려면 <span class="math inline">\(\phi\)</span>-mixing임을 보여도 된다는 것이다.</p>
 </div>
 
-<p><strong>Ibragimov conjecture</strong>에 의하면 strictly, centered, <span class="math inline">\(\phi\)</span>-mixing sequence <span class="math inline">\(X_1, X_2, \ldots\)</span>, such that <span class="math inline">\(EX_{1}^{2}&lt;\infty\)</span> and <span class="math inline">\(\text{Var}(\sum_{k=1}^{n}X_{k})\rightarrow \infty\)</span> as <span class="math inline">\(n\rightarrow \infty\)</span> satisfies the central limit theorem.</p>
+<p>많은 strictly stationary linear process에서 <span class="math inline">\(\alpha\)</span>-mixing은 성립하지 않는다. 가장 대표적인 예로 strictly AR(1) 과정, <span class="math inline">\(X:= (X_k, k\in\mathbb{Z})\)</span> of the form <span class="math inline">\(X_{k}=\frac{1}{2}X_{k-1}+\xi_{k}\)</span>, where <span class="math inline">\((\xi_k, k\in \mathbb{Z})\)</span> is a sequence of i.i.d random variables, each taking values 0 and 1 with probability $ each가 있다고 한다.</p>
+</div>
+<div id="beta-mixing" class="section level2">
+<h2><span class="math inline">\(\beta\)</span>-mixing</h2>
+<p><a href="https://www.encyclopediaofmath.org/index.php/Strong_mixing_conditions#Br">Encyclopedia of Mathematics의 strong mixing conditions 파트</a> 에는 <span class="math inline">\(\beta\)</span>-mixing이라는 개념도 소개되어 있다. 이것의 measures of dependence는 다음과 같다.</p>
+<p><span class="math display">\[
+\rho(\mathcal{H}, \mathcal{G})  = \sup \frac{1}{2}\sum_{i=1}^{I}\sum_{j=1}^{J}|P(H_{i} \cap G_{j}) - P(H_{i})P(G_{j})|
+\]</span></p>
+<p>이며 이 supremum은 <span class="math inline">\(F_{i}\in \mathcal{H}\)</span> for each <span class="math inline">\(i\)</span> 그리고 <span class="math inline">\(G_{j} \in \mathcal{G}\)</span> for each <span class="math inline">\(j\)</span>일 때 <span class="math inline">\(\Omega\)</span>의 finite partition들 <span class="math inline">\((H_1, H_2, \ldots, H_I)\)</span>와 <span class="math inline">\((G_1, G_2, \ldots, G_{J})\)</span>의 모든 pair들에 취해진 것이다.</p>
+<p>또한 같은 방법으로</p>
+<ul>
+<li>만약 <span class="math inline">\(\beta(n) \rightarrow 0\)</span> as <span class="math inline">\(n\rightarrow \infty\)</span>일 때 <span class="math inline">\((\Omega, \mathcal{A}, P)\)</span>에서 정의된 확률변수들의 strictly stationary sequence <span class="math inline">\(X:=(X_k, k\in \mathbb{Z})\)</span>는 <strong>absolutely regular</strong> 또는 <span class="math inline">\(\beta\)</span>-mixing이라고 한다.</li>
+</ul>
+<p><span class="math inline">\(\beta\)</span>-mixing을 고려하면 다음의 inequality가 성립한다.</p>
+<p><span class="math display">\[
+2\alpha(\mathcal{H}, \mathcal{G}) \leq \beta(\mathcal{H}, \mathcal{G}) \leq \phi(\mathcal{H}, \mathcal{G}) \leq \frac{1}{2}\psi(\mathcal{H}, \mathcal{G}). 
+\]</span></p>
+<p>또한 다음과 같은 mixing condition들의 hierarchy가 존재한다.</p>
+<ul>
+<li><p><span class="math inline">\(\psi\)</span>-mixing implies <span class="math inline">\(\phi\)</span>-mixing</p></li>
+<li><p><span class="math inline">\(\phi\)</span>-mixing implies both <span class="math inline">\(\rho\)</span>-mixing and <span class="math inline">\(\beta\)</span>-mixing (absolute regularlity)</p></li>
+<li><p><span class="math inline">\(\phi\)</span>-mixing and <span class="math inline">\(\beta\)</span>-mixing each imply <span class="math inline">\(\alpha\)</span>-mixing (strong mixing)</p></li>
+<li><p>Aside from “transitivity”, there are in general no other implications between these five mixing conditions. In particular, neither of the conditions <span class="math inline">\(\rho\)</span>-mixing and <span class="math inline">\(\beta\)</span>-mixing implies each other.</p></li>
+</ul>
+<div id="ibragimov-conjecture" class="section level3">
+<h3>Ibragimov conjecture</h3>
+<p><span class="math inline">\(X:= (X_k, k\in \mathbb{Z})\)</span>가 random variable들의 strictly stationary sequence이며</p>
+<p><span class="math display">\[
+EX_0 = 0, EX_0^2 &lt;\infty, \text{ and } ES_{n}^{2} \rightarrow \infty \text{ as }n\rightarrow \infty
+\]</span></p>
+<p>이면 1960년대에 I.A. Ibragimov라는 사람이 이러한 조건 하에서 <span class="math inline">\(X\)</span>가 <span class="math inline">\(\phi\)</span>-mixing일 경우에 CLT가 성립할 것이라는 추측을 하였다. 이 추측은 1985년에 Peligrad라는 사람이 좀 더 강한 성장조건 <span class="math inline">\(\lim\inf_{n\rightarrow \infty}\frac{1}{n}ES_{n}^2&gt;0\)</span>인 조건에서는 증명하였으나 아직 풀리지는 않았다.</p>
+<p>또한 위의 조건과 <span class="math inline">\(\phi\)</span>-mixing을 섞을 경우 CLT가 성립하지 않을 수도 있다. 그러나 어떤 <span class="math inline">\(\delta&gt;0\)</span>에 대해 좀 더 강한 모멘트 조건 <span class="math inline">\(E|X_0|^{2+\delta}&lt;\infty\)</span>를 주거나 “logarithmic” mixing rate assumption <span class="math inline">\(\sum_{n=1}^{\infty}\rho(2^n)&lt;\infty\)</span>를 주면 CLT가 성립한다고 한다. (Ibragimov의 1975년 연구)</p>
 <div id="refs" class="references">
 <div id="ref-DasGupta2008">
 <p>DasGupta, Anirban. 2008. <em>Asymptotic Theory of Statistics and Probability</em>. Springer-Verlag GmbH. <a href="https://www.ebook.de/de/product/7043822/anirban_dasgupta_asymptotic_theory_of_statistics_and_probability.html">https://www.ebook.de/de/product/7043822/anirban_dasgupta_asymptotic_theory_of_statistics_and_probability.html</a>.</p>
@@ -623,6 +657,7 @@ Y_n = g(X_n, X_{n+1},\ldots, X_{n+m-1}, X_{n+m}), \qquad{n \geq 1.}
 </div>
 <div id="ref-Stoyanov2014">
 <p>Stoyanov, Jordan M. 2014. <em>Counterexamples in Probability: Third Edition</em>. 3rd ed. DOVER PUBN INC. <a href="https://www.ebook.de/de/product/19654789/jordan_m_stoyanov_counterexamples_in_probability_third_edition.html">https://www.ebook.de/de/product/19654789/jordan_m_stoyanov_counterexamples_in_probability_third_edition.html</a>.</p>
+</div>
 </div>
 </div>
 </div>
