@@ -1,11 +1,10 @@
 <!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
 
 <head>
 
 <meta charset="utf-8" />
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="pandoc" />
 <meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
@@ -332,6 +331,7 @@ summary {
   border: none;
   display: inline-block;
   border-radius: 4px;
+  background-color: transparent;
 }
 
 .tabset-dropdown > .nav-tabs.nav-tabs-open > li {
@@ -369,6 +369,19 @@ summary {
 
 </div>
 
+<div id="TOC">
+<ul>
+<li><a href="#측도와-확률측도">측도와 확률측도</a><ul>
+<li><a href="#측도의-종류">측도의 종류</a></li>
+</ul></li>
+<li><a href="#르베그-측도">르베그 측도</a><ul>
+<li><a href="#outer-measure">Outer measure</a></li>
+</ul></li>
+<li><a href="#assigning-probabilities">Assigning probabilities</a></li>
+<li><a href="#probability-space">Probability space</a></li>
+<li><a href="#extension">Extension</a></li>
+</ul>
+</div>
 
 <p>다음의 책을 참고하였다.</p>
 <ul>
@@ -381,52 +394,206 @@ summary {
 <li><p>Analysis, Measure, and Probability: A visual introduction</p></li>
 <li><p>Counterexamples in Probability, Jordan M. Stoyanov (JS)</p></li>
 </ul>
-<div id="측도와-확률측도" class="section level1">
-<h1><span class="header-section-number">1</span> 측도와 확률측도</h1>
-<p><span class="citation">(Proschan and Shaw 2018)</span></p>
+<div id="측도와-확률측도" class="section level2">
+<h2>측도와 확률측도</h2>
+<p><span class="citation">Krantz (2018)</span> 에 따르면 <span class="math inline">\(m(S)\)</span>를 집합 <span class="math inline">\(S\)</span>의 길이라고 하자. 그러면 우리는 <span class="math inline">\(m\)</span>이 다음의 성질들을 만족했으면 한다.</p>
+<ul>
+<li><p><span class="math inline">\(m(S)\geq 0\)</span> for every set <span class="math inline">\(S\)</span></p></li>
+<li><p><span class="math inline">\(m(A\cup B)\leq m(A) + m(B)\)</span> <strong>(subadditivity)</strong></p></li>
+<li><p>만약 <span class="math inline">\(A_1, A_2, \ldots\)</span>가 countably many pairwise disjoint set들이라고 하면</p></li>
+</ul>
+<p><span class="math display">\[
+m\Bigg(\bigcup_{j=1}^{\infty} A_j \Bigg) = \sum_{j=1}^{\infty}m(A_{j})
+\]</span></p>
+<p>을 만족했으면 좋겠다. <strong>(countable additivity)</strong></p>
+<ul>
+<li>만약 <span class="math inline">\(a\in\mathbb{R}\)</span>일 때 <span class="math inline">\(\tau_{a}(S) = \{ s + a : s\in S\}\)</span>가 <span class="math inline">\(S\)</span>의 transition (<span class="math inline">\(s\)</span>를 <span class="math inline">\(a\)</span>만큼 움직인 것)이라고 하자. 그러면 <span class="math inline">\(m(\tau_{a}(S))=m(S)\)</span>이길 바란다. <strong>(translation invariant)</strong></li>
+</ul>
+
+<div class="theorem">
+<p><span id="thm:Vitali" class="theorem"><strong>Theorem 1  (Vitali의 예제)  </strong></span>실수의 모든 집합에 대해 앞서 말한 모든 바람직한 성질들을 만족하는 길이의 개념 <span class="math inline">\(m\)</span>은 존재하지 않는다.</p>
+</div>
+
+
+<div class="proof">
+<p> <span class="proof"><em>Proof. </em></span> Unit interval <span class="math inline">\(I = [0,1]\)</span>에서의 construction을 고려해보자. 그리고 arithmetic
+on <span class="math inline">\(I\)</span> modulo 1을 생각한다. 이 말인 즉슨, 우리가 두 숫자를 더할 때, 1이 넘어가면 1을 빼는 것이다. 예를 들면</p>
+<p><span class="math display">\[
+\frac{3}{4} + \frac{3}{4} = \frac{1}{2}, \frac{1}{2} +  \frac{1}{2} + \frac{5}{8} = \frac{1}{8}
+\]</span></p>
+<p>이 된다.</p>
+<p>다음으로 <span class="math inline">\(I\)</span>에서 <span class="math inline">\(x-y\)</span>가 유리수가 되면 <span class="math inline">\(x\sim y\)</span>로 표현하기로 한다. 이것이 equivalence relation이 됨을 쉽게 보일 수 있다고 한다. 이런 equivalence class는 uncountably many하게 존재하고, 각각의 equivalence class는 countably many element를 갖는다. 선택공리를<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a> 고려하면 우리는 각각의 equivalence class로부터 원소를 하나씩 뽑을 수 있다. 이 때 이렇게 선택된 원소들의 집합을 <span class="math inline">\(S\)</span>라고 하자. 이제 우리는 <span class="math inline">\(S\)</span>가 non-measurable set임을 보일 것이다.</p>
+<p><span class="math inline">\(q\)</span>가 nonzero 유리수라고 할 때 다음과 같은 집합 <span class="math inline">\(S + q = \{ s + q : s\in S \}\)</span>를 고려해보자. <span class="math inline">\(q,q&#39;\)</span>가 distinct rational number일 때 우리는 <span class="math inline">\(S+q\)</span>, <span class="math inline">\(S+q&#39;\)</span>가 disjoint임을 보이고 싶다. 실제로 만약 <span class="math inline">\(x\in S + q \cap S + q&#39;\)</span>이면, <span class="math inline">\(x = s+q, x = s&#39; + q&#39;\)</span> for som <span class="math inline">\(s, s&#39; \in S\)</span>이다. 그러나 이것은 <span class="math inline">\(s-s&#39;\)</span>가 유리수임을 의미한다. 따라서 <span class="math inline">\(s,s&#39;\)</span>는 같은 equivalent class에 들어간다. 그런데 그렇지 않다! <span class="math inline">\(s-s&#39;\)</span>가 유리수일 방법은 <span class="math inline">\(s=s&#39;\)</span>밖에 없다. 그러면 <span class="math inline">\(q=q&#39;\)</span>이다. 따라서 두 집합 <span class="math inline">\(S+q\)</span>, <span class="math inline">\(S&#39;+q&#39;\)</span>는 이 경우에 같아야 한다. (그래서 안됨)</p>
+<p>따라서 <span class="math inline">\(S+q\)</span>, <span class="math inline">\(S+q&#39;\)</span>는 disjoint이다. 그리고 이 두 집합들은 geometrically identical (하나는 다른 하나의 단지 translate일 뿐)이다.</p>
+<p>우리는</p>
+<p><span class="math display">\[
+I = \bigcup_{q\in [0,1] \cap \mathbb{Q}} S+q  
+\]</span></p>
+<p>임을 안다. 이것은 단지 <span class="math inline">\(I\)</span>의 모든 원소들이 어떤 <span class="math inline">\(s\in S\)</span>, <span class="math inline">\(q \in \mathbb{Q}\)</span>의 합인 <span class="math inline">\(s+q\)</span>로 나타낼 수 있음을 의미한다.</p>
+<p>그러면 이 때 <span class="math inline">\(S\)</span>의 측도는 무엇인가?</p>
+<ul>
+<li><p>만약 이것이 0이라면, 모든 <span class="math inline">\(S+q\)</span>가 measure 0을 가져 <span class="math inline">\(I\)</span>의 측도는 0이다</p></li>
+<li><p>만약 이것이 어떤 양의 측도 <span class="math inline">\(\sigma\)</span>를 갖는다면 각각의 <span class="math inline">\(S+q\)</span> 또한 양의 측도 <span class="math inline">\(\sigma\)</span>를 갖고 따라서 <span class="math inline">\(I\)</span>는 무한대의 measure를 갖게 된다.</p></li>
+</ul>
+<p>즉 <span class="math inline">\(S\)</span>에 측도를 부여할 수 없다.</p>
+</div>
+
+<p>따라서 모든 집합에 대해 측도를 부여할 수 없으므로 <strong>measurable</strong>이라는 개념을 생각하게 된다.</p>
+
+<div class="remark">
+<p> <span class="remark"><em>Remark. </em></span> <span class="citation">Krantz (2018)</span> 에 따르면 <span class="math inline">\(\sigma\)</span>-algebra의 모든 원소들을 <strong>measurable set</strong>이라고 부른다.</p>
+</div>
+
+<p><span class="citation">(Proschan 2016)</span></p>
 <p><strong>확률 측도(probability measure)</strong> <span class="math inline">\(P\)</span>는 allowable sets <span class="math inline">\(\mathcal{F}\)</span>에 확률을 할당해주고 특정 조건들을 만족하는 함수이다.</p>
 <p>가능한 한 많은 집합들에 확률을 부여하면 좋기 때문에 우리는 확률 측도 <span class="math inline">\(P\)</span>가</p>
 <ul>
 <li><p><span class="math inline">\(P(\Omega)=1\)</span>,</p></li>
-<li><p><span class="math inline">\((P\cup_{t}E_t) = \sum_t P(E_t)\)</span> for every collection of disjoint sets <span class="math inline">\(E_t\)</span>, even an uncountable collection</p></li>
+<li><p><span class="math inline">\((P\cup_{t}E_t) = \sum_t P(E_t)\)</span> for every collection of disjoint sets <span class="math inline">\(E_t\)</span>, even an uncountable collection (참고: outer measure에서는 이 부분이 <span class="math inline">\(\leq\)</span>인 듯)</p></li>
 </ul>
 <p>이면 좋을 것이다.</p>
 <p>그러나, <strong>uncountable additivity</strong>는 부여하기엔 너무 많은 조건이다. 예를 들면 각 <span class="math inline">\(\omega \in \Omega\)</span>에 같은 확률 <span class="math inline">\(p\)</span>를 할당하는 측도를 생각해보자. <span class="math inline">\(P\)</span>가 uncountably additive이므로, <span class="math inline">\(1=P(\Omega)=P([0,1]) = \sum_{\Omega}p\)</span>가 된다. 그런데 <span class="math inline">\(\sum_{\Omega}p\)</span> 값은 <span class="math inline">\(p=0\)</span>이면 0, <span class="math inline">\(p&gt;0\)</span>이면 <span class="math inline">\(\infty\)</span>가 된다. 따라서 uncountable additivity를 갖는 확률측도는 만들 수 없다.</p>
 <p>대신 <strong>countable additivity</strong>를 부여해 확률측도를 만들게 된다.</p>
 
 <div class="definition">
-<p><span id="def:unnamed-chunk-1" class="definition"><strong>Definition 1.1  (Measure and probability measure)  </strong></span>A <strong>measure</strong> <span class="math inline">\(\mu\)</span> is a nonnegative function with domain the allowable sets <span class="math inline">\(\mathcal{F}\)</span> such that if <span class="math inline">\(E_1, E_2, \ldots \in \mathcal{F}\)</span> are disjoint, then <span class="math inline">\(\mu(\cup_{i=1}^{\infty}E_i) = \sum_{i=1}^{\infty}\mu(E_i)\)</span>. A <strong>probability measure</strong> <span class="math inline">\(P\)</span> is measure such that <span class="math inline">\(P(\Omega)=1\)</span>.</p>
+<p><span id="def:unnamed-chunk-3" class="definition"><strong>Definition 1  (Measure and probability measure)  </strong></span>A <strong>measure</strong> <span class="math inline">\(\mu\)</span> is a nonnegative function with domain the allowable sets <span class="math inline">\(\mathcal{F}\)</span> such that if <span class="math inline">\(E_1, E_2, \ldots \in \mathcal{F}\)</span> are disjoint, then</p>
+<p><span class="math display">\[
+\mu(\cup_{i=1}^{\infty}E_i) = \sum_{i=1}^{\infty}\mu(E_i) \qquad{\text{countable additivity}.}
+\]</span></p>
+<p>A <strong>probability measure</strong> <span class="math inline">\(P\)</span> is measure such that <span class="math inline">\(P(\Omega)=1\)</span>.</p>
 </div>
 
 
 <div class="example">
-<p><span id="exm:unnamed-chunk-2" class="example"><strong>Example 1.1  (Counting measure)  </strong></span><span class="math inline">\(\Omega = \{ x_1, x_2, \ldots \}\)</span>가 countable set이고 <span class="math inline">\(\mathcal{F}=T(\Omega)\)</span>가 total <span class="math inline">\(\sigma\)</span>-field of all subsets of <span class="math inline">\(\Omega\)</span>라고 하자. <span class="math inline">\(A\in\mathcal{F}\)</span>에 대해 <span class="math inline">\(\mu(A)= A\text{의 원소의 갯수}\)</span>라고 정의하자. 그러면 <span class="math inline">\(\mu\)</span>는 측도가 되는데 이를 특별히 <strong>counting measure</strong> on <span class="math inline">\(\mathcal{F}\)</span>라고 부른다. Counting measure는 <span class="math inline">\(\Omega\)</span>의 원소가 한 개 이상일 경우 <span class="math inline">\(\mu(\Omega)&gt;1\)</span>이 되기 때문에 확률측도가 아니다.</p>
+<p><span id="exm:unnamed-chunk-4" class="example"><strong>Example 1  (Counting measure)  </strong></span><span class="math inline">\(\Omega = \{ x_1, x_2, \ldots \}\)</span>가 countable set이고 <span class="math inline">\(\mathcal{F}=T(\Omega)\)</span>가 total <span class="math inline">\(\sigma\)</span>-field of all subsets of <span class="math inline">\(\Omega\)</span>라고 하자. <span class="math inline">\(A\in\mathcal{F}\)</span>에 대해 <span class="math inline">\(\mu(A)= A\text{의 원소의 갯수}\)</span>라고 정의하자. 그러면 <span class="math inline">\(\mu\)</span>는 측도가 되는데 이를 특별히 <strong>counting measure</strong> on <span class="math inline">\(\mathcal{F}\)</span>라고 부른다. Counting measure는 <span class="math inline">\(\Omega\)</span>의 원소가 한 개 이상일 경우 <span class="math inline">\(\mu(\Omega)&gt;1\)</span>이 되기 때문에 확률측도가 아니다.</p>
 </div>
 
 
 <div class="example">
-<p><span id="exm:unnamed-chunk-3" class="example"><strong>Example 1.2  (확률 질량 함수가 측도를 결정)  </strong></span>앞서 counting measure를 가져오고 <span class="math inline">\(p_i \geq 0\)</span>, <span class="math inline">\(\sum_{i=1}^{\infty}p_i = 1\)</span>이라고 하자. <span class="math inline">\(A\in\mathcal{F}\)</span>에 대해 <span class="math inline">\(P(A) = \sum_{x_i \in A}p_i\)</span>라고 두자. 이 합은 nonnegative이고 countably additive하다. 또한 <span class="math inline">\(P(\Omega) = \sum_{j=1}^{\infty}p_{j}=1\)</span>이므로 <span class="math inline">\(P\)</span>는 <span class="math inline">\(\mathcal{F}\)</span>에서의 확률 측도이다. 즉 이 예제는 binomial, Poisson, hypergeometric 등과 같은 확률 질량 함수들이 확류 측도를 특정한다는 것을 알려준다.</p>
+<p><span id="exm:unnamed-chunk-5" class="example"><strong>Example 2  (확률 질량 함수가 측도를 결정)  </strong></span>앞서 counting measure를 가져오고 <span class="math inline">\(p_i \geq 0\)</span>, <span class="math inline">\(\sum_{i=1}^{\infty}p_i = 1\)</span>이라고 하자. <span class="math inline">\(A\in\mathcal{F}\)</span>에 대해 <span class="math inline">\(P(A) = \sum_{x_i \in A}p_i\)</span>라고 두자. 이 합은 nonnegative이고 countably additive하다. 또한 <span class="math inline">\(P(\Omega) = \sum_{j=1}^{\infty}p_{j}=1\)</span>이므로 <span class="math inline">\(P\)</span>는 <span class="math inline">\(\mathcal{F}\)</span>에서의 확률 측도이다. 즉 이 예제는 binomial, Poisson, hypergeometric 등과 같은 확률 질량 함수들이 확류 측도를 특정한다는 것을 알려준다.</p>
 </div>
 
+<div id="측도의-종류" class="section level3">
+<h3>측도의 종류</h3>
+<p>다음은 <span class="citation">Krantz (2018)</span> 의 19쪽에서 나오는 측도의 종류다.</p>
+<ul>
+<li><p><span class="math inline">\(\mathcal{B}\)</span>를 <span class="math inline">\(\mathbb{R}\)</span>에서의 Borel <span class="math inline">\(\sigma\)</span>-algebra라고 하자. 모든 Borel set <span class="math inline">\(E\)</span>에 대해 <span class="math inline">\(\mu(E)=0\)</span> 이라고 한다면 <span class="math inline">\(\mu\)</span>는 측도가 된다.</p></li>
+<li><p><span class="math inline">\(\mathcal{B}\)</span>를 <span class="math inline">\(\mathbb{R}\)</span>에서의 Borel <span class="math inline">\(\sigma\)</span>-algebra라고 하자. <span class="math inline">\(\mu(\emptyset)=0\)</span>, <span class="math inline">\(\mu(E) = +\infty\)</span> for every other Borel set <span class="math inline">\(E\)</span>라고 정의하자. 그러면 <span class="math inline">\(\mu\)</span>는 측도가 된다. 그러나 이것은 <span class="math inline">\(\sigma\)</span>-finite가 아니다.</p></li>
+<li><p><span class="math inline">\(\mathcal{B}\)</span>를 <span class="math inline">\(\mathbb{R}\)</span>에서의 Borel <span class="math inline">\(\sigma\)</span>-algebra라고 하자. <span class="math inline">\(\mathbb{R}\)</span>에서 점 하나 <span class="math inline">\(P\in \mathbb{R}\)</span>를 고정시키자. Borel set <span class="math inline">\(E\)</span>에 대해 다음을 정의하자.</p></li>
+</ul>
+<p><span class="math display">\[
+\mu_{P}(E) =
+\begin{cases}
+0 &amp; \qquad{\text{if } P \notin E,}\\
+1 &amp; \qquad{\text{if } P \in E.}
+\end{cases}
+\]</span></p>
+<p>그러면 <span class="math inline">\(\mu_{P}\)</span>는 finite measure가 된다. 우리는 이것을 point mass (Dirac mass)에 <span class="math inline">\(P\)</span>에 집중된 <strong>unit measure</strong>라고 부른다.</p>
+<ul>
+<li><p><span class="math inline">\(\mathbb{R}\)</span>에서의 Borel <span class="math inline">\(\sigma\)</span>-algebra 에서 construct 된 측도이며 interval <span class="math inline">\([a,b]\)</span> 또는 <span class="math inline">\((a,b)\)</span> 또는 <span class="math inline">\([a,b)\)</span> 또는 <span class="math inline">\((a,b]\)</span> 에서 <span class="math inline">\(b-a\)</span>라는 값을 주었다고 하자. 그러면 이 측도는 Lebesgue가 construct한 <strong>Lebesgue measure</strong>라고 한다. 이것은 finite measure가 아니다. 그러나 각각의 interval <span class="math inline">\(I_{j} = [j, j+1]\)</span>의 길이가 1이고 <span class="math inline">\(\cup_{j}I_{j} =\mathbb{R}\)</span>이기 때문에 <span class="math inline">\(\sigma\)</span>-finite가 된다.</p></li>
+<li><p><span class="math inline">\(g:\mathbb{R} \rightarrow \mathbb{R}\)</span>에서 정의된 strictly monotone increasing function이라고 하자. 그러면 각각의 interval <span class="math inline">\([a,b]\)</span> 또는 <span class="math inline">\((a,b)\)</span> 또는 <span class="math inline">\([a,b)\)</span> 또는 <span class="math inline">\((a,b]\)</span> 에서 <span class="math inline">\(g(b) - g(a)\)</span>라는 측도를 줄 수 있다. 이것을 <span class="math inline">\(g\)</span>에 의해 induced된 <strong>Borel-stieltjes measure</strong>라고 한다.</p></li>
+<li><p><span class="math inline">\(A= \{ a_{j} \}_{j=1}^{\infty}\)</span>를 실수의 countable set이라고 한다. Borel <span class="math inline">\(\sigma\)</span>-algebra <span class="math inline">\(\mathcal{B}\)</span>에 있는 집합 <span class="math inline">\(E\)</span>에서 <span class="math inline">\(\mu(E)\)</span>를 <span class="math inline">\(E\)</span>에 놓여 있는 <span class="math inline">\(A\)</span>의 원소의 숫자라고 하자. 그러면 <span class="math inline">\(\mu\)</span>는 측도다.</p></li>
+</ul>
+</div>
+</div>
+<div id="르베그-측도" class="section level2">
+<h2>르베그 측도</h2>
 <p>지금까지는 countable sample space만 살펴보았다. 한편 <span class="math inline">\(\mathbb{R}\)</span>과 같은 uncountable set에서의 중요한 측도로 <strong>르베그 측도(Lebesgue measure)</strong>가 있다.</p>
 
 <div class="example">
-<p><span id="exm:unnamed-chunk-4" class="example"><strong>Example 1.3  (르베그 측도)  </strong></span>보렐 집합을 포함하는 <span class="math inline">\(\sigma\)</span>-field <span class="math inline">\(\mathcal{L}\)</span>에 <span class="math inline">\(\mu_{L}(C) = \text{length}(C)\)</span> (if <span class="math inline">\(C\)</span> is an interval)로 정의된 측도 <span class="math inline">\(\mu_{L}\)</span>이 정의되어 있으면 <span class="math inline">\(\mu_{L}\)</span>를 <strong>르베그 측도</strong>, <span class="math inline">\(\mathcal{L}\)</span>을 <strong>르베그 집합</strong>이라고 부른다. 우리가 이 르베그 집합을 <span class="math inline">\([0,1]\)</span>의 subset들로 한정하면, <span class="math inline">\(\mu_{L}\)</span>은 확률 측도가 된다.</p>
+<p><span id="exm:unnamed-chunk-6" class="example"><strong>Example 3  (르베그 측도)  </strong></span>보렐 집합을 포함하는 <span class="math inline">\(\sigma\)</span>-field <span class="math inline">\(\mathcal{L}\)</span>에 <span class="math inline">\(\mu_{L}(C) = \text{length}(C)\)</span> (if <span class="math inline">\(C\)</span> is an interval)로 정의된 측도 <span class="math inline">\(\mu_{L}\)</span>이 정의되어 있으면 <span class="math inline">\(\mu_{L}\)</span>를 <strong>르베그 측도</strong>, <span class="math inline">\(\mathcal{L}\)</span>을 <strong>르베그 집합</strong>이라고 부른다. 우리가 이 르베그 집합을 <span class="math inline">\([0,1]\)</span>의 subset들로 한정하면, <span class="math inline">\(\mu_{L}\)</span>은 확률 측도가 된다.</p>
 </div>
 
+<p><span class="citation">Proschan (2016)</span> 의 설명에 의하면 실해석학에서는 르베그 측도의 존재성을 증명하는 데 많은 시간을 들인다고 한다. <span class="citation">Proschan (2016)</span> 에서는 간단한 아웃라인을 설명하였다.</p>
+<ol style="list-style-type: decimal">
+<li><p>Any interval <span class="math inline">\(I\)</span>에 대해 <span class="math inline">\(\mu(I) = \text{length}(I)\)</span>를 정의한다.</p></li>
+<li><p><span class="math inline">\(\mu\)</span>를 arbitary set <span class="math inline">\(A\)</span>에 대해서도 확장한다. 방법은 outer measure <span class="math inline">\(\mu^{*}\)</span>라는 것을 <span class="math inline">\(\mu^{*}(A) = \inf \sum_{n}\text{length}(I_n)\)</span>으로 정의하는 것이다. 이 때 infimum은 <span class="math inline">\(A\subset \cup_{n}I_n\)</span>을 만족하는 interval들 <span class="math inline">\(I_n\)</span>의 모든 countable union들 <span class="math inline">\(\cup_{n}I_n\)</span>에 대해 취하는 것이다. <span class="citation">Proschan (2016)</span> 의 설명에 의하면 <span class="math inline">\(A\)</span>가 interval일 때 <span class="math inline">\(\mu^{*}\)</span>와 <span class="math inline">\(\mu\)</span>가 일치한다는 것을 쉽게 볼 수 있다고 한다. 그러나 <span class="math inline">\(\mu^{*}\)</span>는 모든 집합들에 대해 항상 countably additive일 필요가 없다.</p></li>
+<li><p>따라서 다음 단계는 집합의 class를 <span class="math inline">\(\mathcal{L} = \{L : \mu^{*}(A) = \mu^{*}(L\cap A) + \mu^{*}(L^{C} \cap A)\)</span> for every set <span class="math inline">\(A \}\)</span>로 제한한다. 이 때 이 collection <span class="math inline">\(\mathcal{L}\)</span>을 <strong>Lebesgue set</strong>라고 부른다. 이 때 Lebesgue set은 모든 Borel set들을 포함하는 <span class="math inline">\(\sigma\)</span>-field가 된다. 결국 <span class="math inline">\(\mu^{*}\)</span>를 <span class="math inline">\(\mathcal{L}\)</span>로 제한하는 것이 Lebesgue 측도 <span class="math inline">\(\mu_{L}\)</span>을 만든다.</p></li>
+</ol>
+<div id="outer-measure" class="section level3">
+<h3>Outer measure</h3>
+<p><strong>Outer measure</strong>라는 용어는 <span class="math inline">\(A\)</span>의 측도를 바깥에서부터 근사, 즉 <span class="math inline">\(A\)</span>를 cover할 만한 적당한 집합들의 collection의 measure를 고려하는 것에서부터 유래한다. <span class="citation">Proschan (2016)</span> 의 설명에 의하면 <span class="math inline">\(A\)</span>가 interval일 때 <span class="math inline">\(\mu^{*}\)</span>와 <span class="math inline">\(\mu\)</span>가 일치한다는 것을 쉽게 볼 수 있다고 한다. 그러나 <span class="math inline">\(\mu^{*}\)</span>는 모든 집합들에 대해 항상 countably additive일 필요가 없다.</p>
+
+<div class="definition">
+<p><span id="def:unnamed-chunk-7" class="definition"><strong>Definition 2  (Lebesgue outer measure)  </strong></span>다음은 <span class="citation">Krantz (2018)</span> 6.1 에서 나오는 <strong>Lebesgue outer measure</strong>의 정의다.</p>
+<p><span class="math inline">\(E \subseteq \mathbb{R}\)</span>이라고 하자. 그러면 <span class="math inline">\(E\)</span>의 Lebesgue outer measure <span class="math inline">\(m^{*}(E)\)</span>를</p>
+<p><span class="math display">\[
+m^{*}(E) =\inf \Bigg\{ \sum_{j=1}^{\infty}l(I_j)  \Bigg\}  
+\]</span></p>
+<p>로 정의한다. 이 때 infimum은 <span class="math inline">\(\mathbb{R}\)</span>에서 <span class="math inline">\(E\)</span>를 cover하는 모든 open interval들의 sequences <span class="math inline">\(\{I_j\}\)</span>에 대해 취해진 것이다. 즉</p>
+<p><span class="math display">\[
+E\subseteq \bigcup_{j=1}^{\infty}I_j
+\]</span></p>
+<p>이다.</p>
 </div>
-<div id="assigning-probabilities" class="section level1">
-<h1><span class="header-section-number">2</span> Assigning probabilities</h1>
+
+
+<div class="theorem">
+<p><span id="thm:unnamed-chunk-8" class="theorem"><strong>Theorem 2  (outer measure의 성질)  </strong></span>Outer measure function <span class="math inline">\(m^{*}\)</span>는 다음을 만족한다.</p>
+<ol style="list-style-type: lower-alpha">
+<li><p><span class="math inline">\(0\leq m^{*}(E) \leq +\infty \forall E\subseteq \mathbb{R}\)</span>.</p></li>
+<li><p><span class="math inline">\(m^{*}(\emptyset) = 0\)</span>.</p></li>
+<li><p>만약 <span class="math inline">\(E\subseteq F\)</span>이면, <span class="math inline">\(m^{*}(E) \leq m^{*}(F)\)</span>이다.</p></li>
+<li><p>만약 <span class="math inline">\(\{E_{j}\}\)</span>가 <span class="math inline">\(\mathbb{R}\)</span>의 countably many subset들이라면</p></li>
+</ol>
+<p><span class="math display">\[
+m^{*}\Bigg( \bigcup_{j=1}^{\infty} E_{j}\Bigg)\leq \sum_{j=1}^{\infty}m^{*}(E_{j})
+\]</span></p>
+<p>이다. <strong>(countable subadditivity)</strong></p>
+</div>
+
+
+<div class="example">
+<p><span id="exm:unnamed-chunk-9" class="example"><strong>Example 4  (outer measure is sub-additive but not countable additive)  </strong></span>
+<a href="https://math.stackexchange.com/questions/1435049/example-outer-measure-is-sub-additive-but-not-countable-additive/1435079">다음의 사이트</a> 에서 예제를 찾을 수 있다. 답변자에 의하면 non-measurable set이 예가 된다고 한다.</p>
+앞서 정리 <a href="#thm:Vitali">1</a> 에서 등장한 Vitali set은 non-measurable set이다. 이 set에 대해 disjoint translates of <span class="math inline">\(S\)</span>, 즉 <span class="math inline">\(S+q\)</span>, <span class="math inline">\(q\in\mathbb{Q} \cap [-1,1]\)</span>가 countably many하게 존재한다고 한다. 이러한 집합들의 합집합을 <span class="math inline">\(U\)</span>라고 할 때, <span class="math inline">\([0,1]\subseteq U \subseteq [-1,2]\)</span>가 된다고 한다. 그러면 <span class="math inline">\(m^{*}(U) \in [1,3]\)</span>이다. 그런데 translate들의 outer measure는 또한 같으므로 이런 outer measure들의 합은 <span class="math inline">\(m^{*}(U)\)</span>가 되는 것이 아니고 <span class="math inline">\(\infty\)</span>가 된다고 한다.
+</div>
+
+<p>다음의 내용들은 <a href="http://www.science.unitn.it/~bagagiol/measures.pdf">Brief survey on Lebesgue measure and measurability</a>에서 가져온 것이다.</p>
+
+<div class="definition">
+<p><span id="def:unnamed-chunk-10" class="definition"><strong>Definition 3  (Lebesgue inner measure on [0,1])  </strong></span>구간 <span class="math inline">\([0,1]\)</span>에서 집합 <span class="math inline">\(A\)</span>의 <strong>Lebesgue inner measure</strong> <span class="math inline">\(m_{*}(A)\)</span>는 다음과 같이 정의된다.</p>
+<p><span class="math display">\[
+m_{*}(A) = 1 - m^{*}([0,1]\backslash A).  
+\]</span></p>
+</div>
+
+
+<div class="definition">
+<p><span id="def:unnamed-chunk-11" class="definition"><strong>Definition 4  (Lebesgue and Lebesgue measure on [0,1])  </strong></span>집합 <span class="math inline">\(A\subseteq [0,1]\)</span>이</p>
+<p><span class="math display">\[
+m^{*}(A) = m_{*}(A)
+\]</span></p>
+<p>일 경우 <span class="math inline">\(A\)</span>를 <span class="math inline">\([0,1]\)</span>에서 <strong>Lebesgue measurable</strong>이라고 한다. 이 때 <span class="math inline">\(A\subseteq [0,1]\)</span>의 <strong>Lebesgue measure</strong>는 다음과 같다.</p>
+<p><span class="math display">\[
+m(A) := m^{*}(A) = m_{*}(A).  
+\]</span></p>
+</div>
+
+
+<div class="definition">
+<p><span id="def:unnamed-chunk-12" class="definition"><strong>Definition 5  (negligible)  </strong></span>어떤 집합의 르베그 측도가 0일 때, 이를 <strong>negligible</strong>이라고 부른다.</p>
+</div>
+
+<ul>
+<li><p>어떤 집합의 Outer measure가 0일 때, 이것은 measurable이고 이것의 측도는 0이며 이것은 <strong>negligible</strong>이다. 이것은 <span class="math inline">\(0 \leq m_{*}(A) \leq m^{*}(A)\)</span>라는 일반적인 사실로부터 바로 유도된다.</p></li>
+<li><p>Singleton <span class="math inline">\(\{a\}\in [0,1]\)</span>은 가측이며 negligible이다.<a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a></p></li>
+<li><p>위의 두 사실로 인해, sigleton들의 countable set들은 가측이며 negligible이 됨을 알 수 있다. 예를 들어, <span class="math inline">\([0,1]\)</span>에서의 유리수의 집합은 가측이며 negligible이다 (왜냐면 유리수의 집합은 countable이기 때문). 한편, <span class="math inline">\([0,1]\)</span>에서의 무리수의 집합은 negligible이며 측도는 1이 된다.</p></li>
+</ul>
+</div>
+</div>
+<div id="assigning-probabilities" class="section level2">
+<h2>Assigning probabilities</h2>
 <p><span class="citation">(Billingsley 2012)</span> 2장</p>
 <p>공간 <span class="math inline">\(\Omega\)</span>를 확률모형으로 다루고자 할 때, 가능한 한 많은 이벤트들에 대해 확률을 부여하고자 하는 것이 당연할 것이다. 가장 단순한 unit interval <span class="math inline">\(\Omega = (0,1]\)</span> 케이스를 살펴보자.</p>
 </div>
-<div id="probability-space" class="section level1">
-<h1><span class="header-section-number">3</span> Probability space</h1>
-<p><span class="citation">(Gut 2013)</span></p>
+<div id="probability-space" class="section level2">
+<h2>Probability space</h2>
+<p><span class="citation">(Gut 2014)</span></p>
 <p><strong>Probability space</strong> or <strong>probability triple</strong> is (<span class="math inline">\(\Omega, \mathcal{F}, P\)</span>)의 수학적 정의를 살펴보자.</p>
 
 <div class="definition">
-<p><span id="def:unnamed-chunk-5" class="definition"><strong>Definition 3.1  (Probability (measure) space)  </strong></span>The triple (<span class="math inline">\(\Omega, \mathcal{F}, P\)</span>)는</p>
+<p><span id="def:unnamed-chunk-13" class="definition"><strong>Definition 6  (Probability (measure) space)  </strong></span>The triple (<span class="math inline">\(\Omega, \mathcal{F}, P\)</span>)는</p>
 <ul>
 <li><p><span class="math inline">\(\Omega\)</span> is the <strong>sample space</strong>, that is, some (possibly abstract) set</p></li>
 <li><p><span class="math inline">\(\mathcal{F}\)</span> is a <span class="math inline">\(\sigma\)</span>-<strong>field</strong> of sets (events) - the <strong>measurable subsets</strong> of <span class="math inline">\(\Omega\)</span>. The atoms, <span class="math inline">\(\{\omega\}\)</span>, of <span class="math inline">\(\Omega\)</span> are called <strong>elementary events</strong></p></li>
@@ -442,8 +609,8 @@ summary {
 
 
 <div class="remark">
-<p> <span class="remark"><em>Remark. </em></span> <span class="citation">(Stoyanov 2013)</span></p>
-<p><span class="citation">Stoyanov (2013)</span> 에 따르면 countable additivity는 다음의 두 조건으로 나누어 쓸 수 있다고 한다.</p>
+<p> <span class="remark"><em>Remark. </em></span> <span class="citation">(Stoyanov 2014)</span></p>
+<p><span class="citation">Stoyanov (2014)</span> 에 따르면 countable additivity는 다음의 두 조건으로 나누어 쓸 수 있다고 한다.</p>
 <ol style="list-style-type: decimal">
 <li><p><span class="math inline">\(P\)</span> finitely additive. That is, for any finite number of pairwise disjoint events <span class="math inline">\(A_1, \ldots, A_n \in \mathcal{A}\)</span>, we have
 <span class="math display">\[P(\cup_{i=1}^{n}A_i) = \sum_{i=1}^{n}P(A_i).\]</span></p></li>
@@ -454,7 +621,7 @@ summary {
 
 
 <div class="example">
-<p><span id="exm:unnamed-chunk-7" class="example"><strong>Example 3.1  (A probability measure which is additive but not sigma-additive)  </strong></span><span class="citation">(Stoyanov 2013)</span></p>
+<p><span id="exm:unnamed-chunk-15" class="example"><strong>Example 5  (A probability measure which is additive but not sigma-additive)  </strong></span><span class="citation">(Stoyanov 2014)</span></p>
 <p>Let <span class="math inline">\(\Omega\)</span> be the set of all rational numbers <span class="math inline">\(r\)</span> of the unit interval <span class="math inline">\([0,1]\)</span> and <span class="math inline">\(\mathcal{F}_{1}\)</span> the class of subsets of <span class="math inline">\(\Omega\)</span> of the form <span class="math inline">\([a,b], (a,b], (a,b)\)</span> or <span class="math inline">\([a,b)\)</span> where <span class="math inline">\(a\)</span> and <span class="math inline">\(b\)</span> are rational numbers. Denote by <span class="math inline">\(\mathcal{F}_{2}\)</span> the class of all finite sums of disjoint sets of <span class="math inline">\(\mathcal{F}_{1}\)</span>. Then <span class="math inline">\(\mathcal{F}_{2}\)</span> is a field. Let us define the probability measure <span class="math inline">\(P\)</span> as follows:
 <span class="math display">\[
 \begin{cases}
@@ -474,14 +641,14 @@ This contradiction shows that <span class="math inline">\(P\)</span> is not <spa
 </div>
 
 </div>
-<div id="extension" class="section level1">
-<h1><span class="header-section-number">4</span> Extension</h1>
+<div id="extension" class="section level2">
+<h2>Extension</h2>
 <p><span class="citation">(Billingsley 2012)</span></p>
 <p>“A probability measure on a field has a unique extension to the generated <span class="math inline">\(\sigma\)</span>-field.”</p>
 <p>(uniqueness를 증명하기 위해 <span class="math inline">\(\pi\)</span>-system, <span class="math inline">\(\lambda\)</span>-system 이용함)</p>
 
 <div class="lemma">
-<p><span id="lem:unnamed-chunk-8" class="lemma"><strong>Lemma 4.1  </strong></span>A class that is both a <span class="math inline">\(\pi\)</span>-system and a <span class="math inline">\(\lambda\)</span>-system is a <span class="math inline">\(\sigma\)</span>-field.</p>
+<p><span id="lem:unnamed-chunk-16" class="lemma"><strong>Lemma 1  </strong></span>A class that is both a <span class="math inline">\(\pi\)</span>-system and a <span class="math inline">\(\lambda\)</span>-system is a <span class="math inline">\(\sigma\)</span>-field.</p>
 </div>
 
 
@@ -489,20 +656,33 @@ This contradiction shows that <span class="math inline">\(P\)</span> is not <spa
 <p> <span class="proof"><em>Proof. </em></span> <span class="citation">(Billingsley 2012)</span>의 “uniqueness and the <span class="math inline">\(\pi-\lambda\)</span> system” 부분 참고</p>
 </div>
 
+<p>(Monotone class theorem)</p>
+<p>(Probability measure space의 completeness)</p>
+<p>(non-measurable sets)</p>
 <div id="refs" class="references">
 <div id="ref-Billingsley2012">
-<p>Billingsley, Patrick. 2012. <em>Probability and Measure</em>. 3rd ed. John Wiley; Sons.</p>
+<p>Billingsley, Patrick. 2012. <em>Probability and Measure Anniv</em>. 3rd ed. John Wiley &amp; Sons. <a href="https://www.ebook.de/de/product/15578575/billingsley_probability_and_measure_anniv.html">https://www.ebook.de/de/product/15578575/billingsley_probability_and_measure_anniv.html</a>.</p>
 </div>
-<div id="ref-Gut2013">
-<p>Gut, Allan. 2013. <em>Probability: A Graduate Course</em>. 2nd ed. Springer Science; Business Media.</p>
+<div id="ref-Gut2014">
+<p>Gut, Allan. 2014. <em>Probability: A Graduate Course</em>. 2nd ed. Springer New York. <a href="https://www.ebook.de/de/product/23277813/allan_gut_probability_a_graduate_course.html">https://www.ebook.de/de/product/23277813/allan_gut_probability_a_graduate_course.html</a>.</p>
 </div>
-<div id="ref-Proschan2018">
-<p>Proschan, Michael A., and Pamela A. Shaw. 2018. <em>Essentials of Probability Theory for Statisticians</em>. CRC Press.</p>
+<div id="ref-Krantz2018">
+<p>Krantz, Steven. 2018. <em>Elementary Introduction to the Lebesgue Integral</em>. Boca Raton, FL: CRC Press.</p>
 </div>
-<div id="ref-Stoyanov2013">
-<p>Stoyanov, Jordan M. 2013. <em>Counterexamples in Probability</em>. 3rd ed. Courier Corporation.</p>
+<div id="ref-Proschan2016">
+<p>Proschan, Michael A. 2016. <em>Essentials of Probability Theory for Statisticians</em>. CRC Press. <a href="https://www.ebook.de/de/product/25453130/michael_a_proschan_essentials_of_probability_theory_for_statisticians.html">https://www.ebook.de/de/product/25453130/michael_a_proschan_essentials_of_probability_theory_for_statisticians.html</a>.</p>
+</div>
+<div id="ref-Stoyanov2014">
+<p>Stoyanov, Jordan M. 2014. <em>Counterexamples in Probability: Third Edition</em>. 3rd ed. DOVER PUBN INC. <a href="https://www.ebook.de/de/product/19654789/jordan_m_stoyanov_counterexamples_in_probability_third_edition.html">https://www.ebook.de/de/product/19654789/jordan_m_stoyanov_counterexamples_in_probability_third_edition.html</a>.</p>
 </div>
 </div>
+</div>
+<div class="footnotes">
+<hr />
+<ol>
+<li id="fn1"><p>만약 선택공리를 인전하지 않는다면 모든 실수 집합에 measure를 assign하는 것이 가능한다고 한다<a href="#fnref1" class="footnote-back">↩︎</a></p></li>
+<li id="fn2"><p>구간 <span class="math inline">\([a-\varepsilon, a+\varepsilon]\cap [0,1]\)</span> with arbitrary <span class="math inline">\(\varepsilon &gt;0\)</span>을 취하면 즉시 <span class="math inline">\(m^{*}(\{a\})=0\)</span>임을 알 수 있다.<a href="#fnref2" class="footnote-back">↩︎</a></p></li>
+</ol>
 </div>
 
 
